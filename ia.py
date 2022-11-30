@@ -1,13 +1,7 @@
 import pymysql
 import nltk
-from flask import Flask, jsonify
-import jsonpickle
-from json import dumps
-from json import JSONEncoder
-
-class set_encoder(JSONEncoder):
-    def default(self, obj):
-        return list(obj)
+from flask import Flask
+import json
 
 def frequenciaScore(linhas):
     contagem = dict([linha[0], 0] for linha in linhas)
@@ -93,8 +87,7 @@ ia = Flask(__name__)
 @ia.route('/apiPesquisa/<string:palavra>', methods = ['GET'])
 def apiPesquisa(palavra):
     perfis = pesquisa(palavra)
-    # jsonperfis = jsonpickle.encode(perfis)
-    jsonperfis = set_encoder().encode(perfis)
-    return jsonify(jsonperfis)
+    jsonperfis = json.dumps(list(perfis))
+    return jsonperfis
 
 ia.run(port=5000, host='localhost', debug = True,use_reloader=False)
