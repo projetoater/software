@@ -8,7 +8,7 @@ import pandas as pd
 
     
 def inserePalavraLocalizacao(idperfil, idpalavra, localizacao):
-    conexao = pymysql.connect(host='localhost',user='root',password='vp$C1976',db='iaater', autocommit = True)
+    conexao = pymysql.connect(host='localhost',user='root',password='ater',db='iaater', autocommit = True)
     cursor = conexao.cursor()
     cursor.execute('insert into palavra_localizacao(idperfil, idpalavra, localizacao) values (%s, %s, %s)', (idperfil, idpalavra, localizacao))
     idpalavraLocalizacao = cursor.lastrowid
@@ -16,7 +16,7 @@ def inserePalavraLocalizacao(idperfil, idpalavra, localizacao):
     return idpalavraLocalizacao
 
 def inserePalavra(palavra):
-    conexao = pymysql.connect(host='localhost',user='root',password='vp$C1976',db='iaater', autocommit = True, use_unicode = True, charset = 'utf8mb4')
+    conexao = pymysql.connect(host='localhost',user='root',password='ater',db='iaater', autocommit = True, use_unicode = True, charset = 'utf8mb4')
     cursor = conexao.cursor()
     cursor.execute('insert into palavras(palavra) values (%s)', palavra)
     idpalavra = cursor.lastrowid
@@ -26,7 +26,7 @@ def inserePalavra(palavra):
 
 def palavraIndexada(palavra):
     retorno = -1
-    conexao = pymysql.connect(host='localhost',user='root',password='vp$C1976',db='iaater', autocommit = True, use_unicode = True, charset = 'utf8mb4')
+    conexao = pymysql.connect(host='localhost',user='root',password='ater',db='iaater', autocommit = True, use_unicode = True, charset = 'utf8mb4')
     cursor = conexao.cursor()
     cursor.execute('select idpalavra from palavras where palavra = %s', palavra)
     if cursor.rowcount > 0:
@@ -39,7 +39,7 @@ def palavraIndexada(palavra):
     return retorno
 
 def inserePerfil(perfil, bio):
-    conexao = pymysql.connect(host='localhost',user='root',password='vp$C1976',db='iaater', autocommit = True)
+    conexao = pymysql.connect(host='localhost',user='root',password='ater',db='iaater', autocommit = True)
     cursor = conexao.cursor()
     cursor.execute('insert into perfis(perfil, bio) values (%s, %s)', (perfil, bio))
     idperfil = cursor.lastrowid  
@@ -49,7 +49,7 @@ def inserePerfil(perfil, bio):
 
 def perfilIndexado(perfil):
     retorno = -1
-    conexao = pymysql.connect(host='localhost',user='root',password='vp$C1976',db='iaater' )
+    conexao = pymysql.connect(host='localhost',user='root',password='ater',db='iaater' )
     cursorUrl = conexao.cursor()
     cursorUrl.execute('select idperfil from perfis where perfil = %s', perfil)
     if cursorUrl.rowcount > 0:
