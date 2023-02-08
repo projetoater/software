@@ -2,10 +2,15 @@ import pymysql
 import nltk
 from flask import Flask
 import json
-import ssl
 import os
+from dotenv import load_dotenv
 
-#context = ssl.create_default_context()
+load_dotenv()
+
+usuario = os.environ.get('AWS_DB_USER')
+senha = os.environ.get('AWS_DB_SENHA')
+db = os.environ.get('AWS_DB')
+host = os.environ.get('AWS_DB_HOST')
 
 def frequenciaScore(linhas):
     contagem = dict([linha[0], 0] for linha in linhas)
@@ -27,7 +32,7 @@ def pesquisa(consulta):
         
 def getPerfil(idperfil):
     retorno = ''
-    conexao = pymysql.connect(host='databaseatermysqlserver.co1nok93ygz0.us-east-1.rds.amazonaws.com',user='admin',password='Proacater2020!farao',db='sys', autocommit = True)
+    conexao = pymysql.connect(host=host,user=usuario,password=senha,db=db, autocommit = True)
     cursor = conexao.cursor()
     cursor.execute('select perfil from perfis where idperfil = %s', idperfil)
     if cursor.rowcount > 0:
@@ -42,7 +47,7 @@ def getPerfil(idperfil):
 def getIdPalavra(palavra):
     retorno = -1
     stemmer = nltk.stem.RSLPStemmer()
-    conexao = pymysql.connect(host='databaseatermysqlserver.co1nok93ygz0.us-east-1.rds.amazonaws.com',user='admin',password='Proacater2020!farao',db='sys', autocommit = True)
+    conexao = pymysql.connect(host=host,user=usuario,password=senha,db=db, autocommit = True)
     cursor = conexao.cursor()
     cursor.execute('select idpalavra from palavras where palavra = %s', stemmer.stem(palavra))
     if cursor.rowcount > 0:
@@ -74,7 +79,7 @@ def buscaMaisPalavras(consulta):
             listaClausulas += 'p%d.idpalavra = %d' % (numeroTabela, idpalavra)
             numeroTabela += 1
     consultacompleta = 'select %s from %s where %s' % (listaCampos, listaTabelas, listaClausulas)
-    conexao = pymysql.connect(host='databaseatermysqlserver.co1nok93ygz0.us-east-1.rds.amazonaws.com',user='admin',password='Proacater2020!farao',db='sys', autocommit = True)
+    conexao = pymysql.connect(host=host,user=usuario,password=senha,db=db, autocommit = True)
     cursor = conexao.cursor()
     cursor.execute(consultacompleta)
     linhas = [linha for linha in cursor]
