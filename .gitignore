@@ -1,7 +1,8 @@
-.env
-.txt
-.sql
-.csv
-.ini
-.git
 desktop.ini
+*.csv
+*.sql
+*.zip
+dbiaater.py
+.env
+*.txt
+*.env
