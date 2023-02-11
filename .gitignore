@@ -6,3 +6,4 @@ dbiaater.py
 .env
 *.txt
 *.env
+!requirements.txt
