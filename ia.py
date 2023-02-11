@@ -62,9 +62,10 @@ def buscaMaisPalavras(consulta):
     listaCampos = 'p1.idperfil'
     listaTabelas = ''
     listaClausulas = ''
+    linhas = []
     palavrasid = []
-    
     palavras = consulta.split(' ')
+    
     numeroTabela = 1
     for palavra in palavras:
         idpalavra = getIdPalavra(palavra)
@@ -78,13 +79,14 @@ def buscaMaisPalavras(consulta):
             listaTabelas += ' palavra_localizacao p%d' % numeroTabela
             listaClausulas += 'p%d.idpalavra = %d' % (numeroTabela, idpalavra)
             numeroTabela += 1
-    consultacompleta = 'select %s from %s where %s' % (listaCampos, listaTabelas, listaClausulas)
-    conexao = pymysql.connect(host=host,user=usuario,password=senha,db=db, autocommit = True)
-    cursor = conexao.cursor()
-    cursor.execute(consultacompleta)
-    linhas = [linha for linha in cursor]
-    cursor.close()
-    conexao.close()
+    if idpalavra > 0:
+        consultacompleta = 'select %s from %s where %s' % (listaCampos, listaTabelas, listaClausulas)
+        conexao = pymysql.connect(host=host,user=usuario,password=senha,db=db, autocommit = True)
+        cursor = conexao.cursor()
+        cursor.execute(consultacompleta)
+        linhas = [linha for linha in cursor]
+        cursor.close()
+        conexao.close()
     return linhas, palavrasid
 
  # perfis = pesquisa('brasil')
