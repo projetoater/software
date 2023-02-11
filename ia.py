@@ -102,4 +102,6 @@ def apiPesquisa(palavra):
     return jsonperfis
 
 #ia.run(debug = True,use_reloader=False, ssl_context='adhoc')
-ia.run(debug = True,use_reloader=False)
+
+if __name__ == "__main__":
+    ia.run(debug = True,use_reloader=False)
