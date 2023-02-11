@@ -101,4 +101,4 @@ def apiPesquisa(palavra):
 #ia.run(debug = True,use_reloader=False, ssl_context='adhoc')
 
 if __name__ == "__main__":
-    ia.run(host='0.0.0.0')
+    ia.run(host="0.0.0.0", port=5001)
