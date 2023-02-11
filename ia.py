@@ -3,9 +3,6 @@ import nltk
 from flask import Flask
 import json
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 usuario = os.environ.get('AWS_DB_USER')
 senha = os.environ.get('AWS_DB_SENHA')
